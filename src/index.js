@@ -7,7 +7,7 @@ import { createHashHistory } from 'history';
 
 import { configureStore } from './redux/store';
 import App from './App';
-import './index.css';
+import './assets/styles';
 
 // Create the history instance that enables client-side application routing.
 const history = createHashHistory();

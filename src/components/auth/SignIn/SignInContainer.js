@@ -5,8 +5,9 @@ import { actions } from '../../../redux/modules/authentication';
 
 import { SignIn } from './SignIn';
 
-const handleFormSubmit = props => () => {
-  console.log(props);
+const handleFormSubmit = ({ signin, fields: { email, password } }) => () => {
+  console.log(email.value)
+  signin(email.value, password.value);
 }
 
 const renderAlert = ({ errorMessage }) => () => {
@@ -20,7 +21,7 @@ const renderAlert = ({ errorMessage }) => () => {
 }
 
 const mapStateToProps = state => ({
-  errorMessage: state.auth.error,
+  errorMessage: state,
 });
 
 const mapDispatchToProps = {

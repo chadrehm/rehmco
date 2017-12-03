@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import logo from './logo.svg';
-import './App.css';
-
+import { HeaderContainer } from './components/Header/HeaderContainer';
 import { SignInContainer } from './components/auth/SignIn/SignInContainer';
+import { SignUpContainer } from './components/auth/SignUp/SignUpContainer';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <HeaderContainer />
+        <div className="container">
+          <Route path="/signin" component={SignInContainer} />
+          <Route path="/signup" component={SignUpContainer} />
         </div>
-        <Route path="/signIn" component={SignInContainer} />
       </div>
     );
   }
