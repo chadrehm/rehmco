@@ -5,7 +5,7 @@ import { HeaderContainer } from './components/Header/HeaderContainer';
 import { Home } from './components/Home';
 import { SignInContainer } from './components/auth/SignIn/SignInContainer';
 import { SignUpContainer } from './components/auth/SignUp/SignUpContainer';
-import { SignOutContainer } from './components/auth/SignOut';
+import { SignOutContainer } from './components/auth/SignOutContainer';
 
 class App extends Component {
   render() {
