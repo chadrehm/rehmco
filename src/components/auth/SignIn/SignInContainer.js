@@ -1,14 +1,14 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { push } from 'connected-react-router';
 import { compose, withHandlers } from 'recompose';
+
 import { actions } from '../../../redux/modules/authentication';
 
 import { SignIn } from './SignIn';
 
-const handleFormSubmit = ({ signin, fields: { email, password } }) => () => {
-  console.log(email.value)
-  signin(email.value, password.value);
-}
+const handleFormSubmit = ({ signin, fields: { email, password }, push }) => () =>
+  signin(email.value, password.value, push);
 
 const renderAlert = ({ errorMessage }) => () => {
   if (errorMessage) {
@@ -21,7 +21,7 @@ const renderAlert = ({ errorMessage }) => () => {
 }
 
 const mapStateToProps = state => ({
-  errorMessage: state,
+  errorMessage: state.auth.errors,
 });
 
 const mapDispatchToProps = {

@@ -9,7 +9,7 @@ const types = {
 }
 
 export const actions = {
-  signinUser: (email, password) => dispatch => {
+  signinUser: (email, password, push) => dispatch => {
     // Submit email and pass to server
     axios.post(`${ROOT_URL}/signin`, { email, password })
       .then(response => {
@@ -18,14 +18,14 @@ export const actions = {
         // -Save the JWT token
         localStorage.setItem('token', response.data.token);
         // -redirect to the route '/feature'
-
+        push('/feature');
       })
       .catch(() => {
         // -Show an error to the
         dispatch(actions.authError('Bad Login Info'));
       });
   },
-  signupUser: (email, password) => dispatch => {
+  signupUser: (email, password, push) => dispatch => {
     // Submit email and pass to server
     axios.post(`${ROOT_URL}/signup`, { email, password })
       .then(response => {
@@ -34,7 +34,7 @@ export const actions = {
         // -Save the JWT token
         localStorage.setItem('token', response.data.token);
         // -redirect to the route '/feature'
-
+        push('/feature');
       })
       .catch(reply => {
         // -Show an error to the
@@ -51,3 +51,23 @@ export const actions = {
       payload: error,
     }),
 }
+
+export const defaultState = {
+  errors: '',
+  authenticated: false,
+}
+
+const reducer = (state = defaultState, action) => {
+  switch (action.type) {
+    case types.AUTH_USER:
+      return { ...state, authenticated: true, error: ''};
+    case types.UNAUTH_USER:
+      return { ...state, authenticated: false, error: '' };
+    case types.AUTH_ERROR:
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export default reducer;

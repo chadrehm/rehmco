@@ -6,7 +6,7 @@ import logo from '../../logo.svg';
 
 class Header extends Component {
   renderLinks() {
-    if (false) {
+    if (this.props.authenticated) {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/signout">Sign Out</Link>
@@ -41,7 +41,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-    authenticated: state,
+    authenticated: state.auth.authenticated,
 });
 
 export const HeaderContainer = connect(mapStateToProps)(Header);

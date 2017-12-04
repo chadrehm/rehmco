@@ -1,12 +1,14 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { push } from 'connected-react-router';
 import { compose, withHandlers } from 'recompose';
+
 import { actions } from '../../../redux/modules/authentication';
 
 import { SignUp } from './SignUp';
 
-const handleFormSubmit = ({ signup, fields: { email, password } }) => () =>
-  signup(email.value, password.value);
+const handleFormSubmit = ({ signup, fields: { email, password }, push }) => () =>
+  signup(email.value, password.value, push);
 
 const renderAlert = ({ errorMessage }) => () => {
   if (errorMessage) {
@@ -45,6 +47,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  push,
   signup: actions.signupUser,
 }
 
