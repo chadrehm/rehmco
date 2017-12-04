@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  push,
   signin: actions.signinUser,
 }
 

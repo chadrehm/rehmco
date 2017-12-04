@@ -53,7 +53,7 @@ const mapDispatchToProps = {
 
 const enhance = compose(
   reduxForm({
-    form: 'signin',
+    form: 'signup',
     fields: ['email','password', 'passwordConfirm'],
     validate,
   }, mapStateToProps, mapDispatchToProps),

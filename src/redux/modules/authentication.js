@@ -20,9 +20,9 @@ export const actions = {
         // -redirect to the route '/feature'
         push('/feature');
       })
-      .catch(() => {
+      .catch(reply => {
         // -Show an error to the
-        dispatch(actions.authError('Bad Login Info'));
+        dispatch(actions.authError(reply.response.data.error));
       });
   },
   signupUser: (email, password, push) => dispatch => {
@@ -53,7 +53,7 @@ export const actions = {
 }
 
 export const defaultState = {
-  errors: '',
+  error: '',
   authenticated: false,
 }
 
