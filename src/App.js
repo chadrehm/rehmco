@@ -6,6 +6,7 @@ import { Home } from './components/Home';
 import { SignInContainer } from './components/auth/SignIn/SignInContainer';
 import { SignUpContainer } from './components/auth/SignUp/SignUpContainer';
 import { SignOutContainer } from './components/auth/SignOutContainer';
+import { MapContainer } from './components/Map/MapContainer';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/signin" component={SignInContainer} />
           <Route path="/signup" component={SignUpContainer} />
           <Route path="/signout" component={SignOutContainer} />
+          <Route path="/map" component={MapContainer} />
         </div>
       </div>
     );

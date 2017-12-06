@@ -18,7 +18,7 @@ export const actions = {
         // -Save the JWT token
         localStorage.setItem('token', response.data.token);
         // -redirect to the route '/feature'
-        push('/feature');
+        push('/map');
       })
       .catch(reply => {
         // -Show an error to the
@@ -34,7 +34,7 @@ export const actions = {
         // -Save the JWT token
         localStorage.setItem('token', response.data.token);
         // -redirect to the route '/feature'
-        push('/feature');
+        push('/map');
       })
       .catch(reply => {
         // -Show an error to the
