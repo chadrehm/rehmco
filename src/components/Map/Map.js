@@ -1,9 +1,16 @@
 import React from 'react';
 
 import { GoogleMap } from './GoogleMap';
+import { GoogleSearch } from './GoogleSearch';
 
-export const Map = ({ lat, lng, handleClick }) =>
+export const Map = ({ gmap, lat, lng, handleClick, setMap, map }) =>
   <div>
-    <button className="btn btn-primary" onClick={handleClick}>click me</button>
-    <GoogleMap lat={lat} lng={lng} />
+    {
+      gmap ?
+      <div>
+        <GoogleSearch map={map} />
+        <GoogleMap lat={lat} lng={lng}  setMap={setMap} />
+      </div>
+      : <p>Loading</p>
+    }
   </div>

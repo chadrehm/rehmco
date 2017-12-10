@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 export default function(ComposedComponent) {
-  class Authentication extends Component {
-    static contextTypes = {
-      router: React.PropTypes.object,
-    }
+  class Authentication extends Component {vg
 
     componentWillMount() {
       if(!this.props.authenticated){
-        this.context.router.push('/');
+        this.props.push('/');
       }
     }
 
     componentWillUpdate(nextProps) {
       if(!nextProps.authenticated){
-        this.context.router.push('/');
+        this.props.push('/');
       }
     }
 
@@ -24,9 +22,13 @@ export default function(ComposedComponent) {
     }
   }
 
-  function mapStateToProps(state){
-    return { authenticated: state.auth.authenticated };
+  const mapStateToProps = state => ({
+    authenticated: state.auth.authenticated,
+  });
+
+  const mapDispatchToProps = {
+    push,
   }
 
-  return connect(mapStateToProps)(Authentication)
+  return connect(mapStateToProps, mapDispatchToProps)(Authentication)
 }

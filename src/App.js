@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
+import RequireAuth from './components/auth/require_auth';
 import { HeaderContainer } from './components/Header/HeaderContainer';
 import { Home } from './components/Home';
 import { SignInContainer } from './components/auth/SignIn/SignInContainer';
@@ -18,7 +19,7 @@ class App extends Component {
           <Route path="/signin" component={SignInContainer} />
           <Route path="/signup" component={SignUpContainer} />
           <Route path="/signout" component={SignOutContainer} />
-          <Route path="/map" component={MapContainer} />
+          <Route path="/map" component={RequireAuth(MapContainer)} />
         </div>
       </div>
     );
