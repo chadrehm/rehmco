@@ -15,6 +15,9 @@ export class GoogleMap extends Component {
       center: {lat: this.props.lat, lng: this.props.lng},
       zoom: 4,
     });
+    /*
+     * Add the map object to redux for use in the search input.
+     */
     this.props.setMap(this.map)
   }
 
