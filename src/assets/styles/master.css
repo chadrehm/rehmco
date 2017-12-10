@@ -39,3 +39,10 @@ html, body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.map-legend .form-control {
+  margin-top: 4em;
+  margin-left: 1em;
+  display: inline-block;
+  width: 60%;
+}
