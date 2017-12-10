@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import asyncLoad from 'react-async-loader';
-import { compose, lifecycle, withStateHandlers, withHandlers } from 'recompose';
+import { compose, withStateHandlers, withHandlers } from 'recompose';
 
 import { actions } from '../../redux/modules/map';
 
