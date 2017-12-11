@@ -5,20 +5,18 @@ export class GoogleMap extends Component {
     return false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.map.panTo({lat: nextProps.lat, lng: nextProps.lng})
-  }
-
   componentDidMount() {
     const { google } = window;
-    this.map = new google.maps.Map(this.refs.map, {
+    const map = new google.maps.Map(this.refs.map, {
       center: {lat: this.props.lat, lng: this.props.lng},
       zoom: 4,
     });
+    const directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
     /*
      * Add the map object to redux for use in the search input.
      */
-    this.props.setMap(this.map)
+    this.props.setMap(directionsDisplay);
   }
 
   render() {

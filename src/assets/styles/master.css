@@ -40,8 +40,11 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-.map-legend .form-control {
+.map-legend{
   margin-top: 4em;
+}
+
+.map-legend .form-control {
   margin-left: 1em;
   display: inline-block;
   width: 60%;

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import asyncLoad from 'react-async-loader';
-import { compose, withStateHandlers, withHandlers } from 'recompose';
+import { compose, withState, lifecycle } from 'recompose';
 
 import { actions } from '../../redux/modules/map';
 
@@ -16,29 +16,42 @@ const mapScriptsToProps = () => ({
 
 const mapStateToProps = state => ({
   map: state.map.data,
-})
+  origin: state.map.origin,
+  destination: state.map.destination,
+});
 
 const mapDispatchToProps = {
   setMap: actions.setMap,
+  setOrigin: actions.setOrigin,
+  setDestination: actions.setDestination,
 }
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   asyncLoad(mapScriptsToProps),
-  withStateHandlers(
-    ({ lat= 34.397, lng= 260 }) => ({ lat, lng }),
-    {
-      updateLatLng: ({ lat, lng }) => () => ({
-        lat: 0,
-        lng: 180,
-      })
-    }
-  ),
-  withHandlers({
-    handleClick: props => () => {
-      props.updateLatLng()
-    }
-  })
+  withState('initState', '_', { lat: 34.397, lng: 260 }),
+  lifecycle({
+    componentWillReceiveProps(nextProps) {
+      const { google } = window;
+      if (google) {
+        const directionsService = new google.maps.DirectionsService;
+        const { map, origin, destination } = nextProps;
+        if (map && origin.geometry && destination.geometry) {
+          directionsService.route({
+            origin: { lat: origin.geometry.location.lat(), lng: origin.geometry.location.lng() },
+            destination: { lat: destination.geometry.location.lat(), lng: destination.geometry.location.lng() },
+            travelMode: "TRANSIT",
+          }, (response, status) => {
+            if (status == 'OK') {
+              map.setDirections(response);
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          });
+        }
+      }
+    },
+  }),
 )
 
 export const MapContainer = enhance(Map);
